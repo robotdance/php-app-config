@@ -51,8 +51,7 @@ class Config
         $yml = yaml_parse_file(self::$configFile);
         if (is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];
-        } else {
-            return $yml[$key];
         }
+        return $yml[$key];
     }
 }
