@@ -1,0 +1,6 @@
+some_setting:
+  development: some setting development
+  test: some setting test
+  production: some setting production
+
+another_setting: another setting without environment
