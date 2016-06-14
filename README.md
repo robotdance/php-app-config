@@ -38,7 +38,7 @@ with a value that can be found at your config file.
 The example below will try to find the key `variable_name.[environment]` at `/config/config.yml`:
 
 ```php
-use robotdance\config;
+use robotdance\Config;
 ...
 $value = Config::get('variable_name');
 ```
