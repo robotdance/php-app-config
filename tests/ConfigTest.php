@@ -39,20 +39,11 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Must throw exception if var does not exists
-     * @expectedException InvalidArgumentException
+     * @expectedException PHPUnit_Framework_Error
      */
     public function testGetEnvMustThrowException()
     {
         $bob = Config::getEnvVar('BOB');
-    }
-
-    /**
-     * Must return null if not enforcing environment
-     */
-    public function testGetEnvMustReturnNull()
-    {
-        $bob = Config::getEnvVar('BOB', false);
-        $this->assertEquals(null, $bob);
     }
 
     /**
@@ -75,7 +66,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Must throw exception if there is no environment defined
-     * @expectedException Exception
+     * @expectedException PHPUnit_Framework_Error
      */
     public function testGetEnvMustTrowExceptionWhenThereIsNoEnvironment()
     {

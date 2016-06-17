@@ -28,26 +28,27 @@ class Config
     }
 
     /**
-     * @param  $key
+     * Returns an environment variable value, generating a warning if it does not exists
+     * @param  $key The environment variable name
      * @return String Value
      */
-    public static function getEnvVar($key, $enforceEnvironment = true)
+    public static function getEnvVar($key)
     {
         $value = getenv($key);
-        if ($value === false && $enforceEnvironment) {
-            throw new \InvalidArgumentException("Environment variable '$key' not found.");
+        if ($value === false) {
+            trigger_error("Environment variable '$key' not found.", E_USER_WARNING);
         }
         return $value;
     }
 
     /**
-     * Return configuration value
+     * Returns a configuration value at /config/config.yml
      * @param  $key
      * @return String Value
      */
-    public static function get($key, $enforceEnvironment = true)
+    public static function get($key)
     {
-        $env = self::getEnvVar('ENVIRONMENT', $enforceEnvironment);
+        $env = self::getEnvVar('ENVIRONMENT');
         $yml = yaml_parse_file(self::$configFile);
         if (is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];
