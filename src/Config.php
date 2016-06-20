@@ -10,7 +10,7 @@ namespace robotdance;
  */
 class Config
 {
-    private static $configFile = './config/config.yml';
+    private static $configFile = '/config/config.yml';
 
     /**
      * Sets where to look for the configuration file.
@@ -25,6 +25,11 @@ class Config
         }
         self::$configFile = $path;
         return self::$configFile;
+    }
+
+    public static function getConfigFile()
+    {
+        return getcwd() . self::$configFile;
     }
 
     /**
@@ -49,7 +54,7 @@ class Config
     public static function get($key)
     {
         $env = self::getEnvVar('ENVIRONMENT');
-        $yml = yaml_parse_file(self::$configFile);
+        $yml = yaml_parse_file(self::getConfigFile());
         if (is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];
         }
