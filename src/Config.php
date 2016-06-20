@@ -10,7 +10,7 @@ namespace robotdance;
  */
 class Config
 {
-    private static $configFile = './config/config.yml';
+    private static $configFile;
 
     /**
      * Sets where to look for the configuration file.
@@ -20,25 +20,23 @@ class Config
      */
     public static function setConfigFile($path)
     {
-        if (!(is_file($path) && is_readable($path))) {
+        self::$configFile = getcwd() . $path;
+        if (!(is_file(self::getConfigFile()) && is_readable(self::getConfigFile()))) {
             throw new \InvalidArgumentException("File not found or without reading permission: $path");
         }
-        self::$configFile = $path;
         return self::$configFile;
     }
 
     /**
-     * Returns an environment variable value, generating a warning if it does not exists
-     * @param  $key The environment variable name
-     * @return String Value
+     * Returns the config file path
+     * @return The config.yml file path
      */
-    public static function getEnvVar($key)
+    public static function getConfigFile()
     {
-        $value = getenv($key);
-        if ($value === false) {
-            trigger_error("Environment variable '$key' not found.", E_USER_WARNING);
+        if(self::$configFile === null) {
+            self::$configFile = getcwd() . '/config/config.yml';
         }
-        return $value;
+        return self::$configFile;
     }
 
     /**
@@ -48,8 +46,8 @@ class Config
      */
     public static function get($key)
     {
-        $env = self::getEnvVar('ENVIRONMENT');
-        $yml = yaml_parse_file(self::$configFile);
+        $env = getenv('ENVIRONMENT');
+        $yml = yaml_parse_file(self::getConfigFile());
         if (is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];
         }

@@ -6,17 +6,24 @@ use robotdance\Config;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-    const CONFIG_PATH = './config/config.yml';
-
     public function setUp()
     {
         putenv('ENVIRONMENT=test');
-        Config::setConfigFile(self::CONFIG_PATH);
     }
 
     public function tearDown()
     {
         putenv('ENVIRONMENT'); // = unset
+    }
+
+    /**
+     * Must return the default configuration
+     */
+    public function testGetConfigFileDefault()
+    {
+        $expected = getcwd() . "/config/config.yml";
+        $actual = Config::getConfigFile();
+        $this->assertEquals($expected, $actual);
     }
 
     /**
@@ -33,26 +40,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetConfigFileReturnSame()
     {
-        $path = self::CONFIG_PATH;
-        $this->assertEquals(Config::setConfigFile($path), $path);
-    }
-
-    /**
-     * Must throw exception if var does not exists
-     * @expectedException PHPUnit_Framework_Error
-     */
-    public function testGetEnvMustThrowException()
-    {
-        $bob = Config::getEnvVar('BOB');
-    }
-
-    /**
-     * Must return a value
-     */
-    public function testGetEnvMustReturnValue()
-    {
-        putenv("BOB=BOB");
-        $this->assertEquals(Config::getEnvVar('BOB'), "BOB");
+        $path = getcwd() . "/config/config.yml";
+        $this->assertEquals(Config::setConfigFile("/config/config.yml"), $path);
     }
 
     /**
