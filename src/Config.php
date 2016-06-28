@@ -5,6 +5,8 @@
 
 namespace robotdance;
 
+use Symfony\Component\Yaml\Yaml;
+
 /**
  * Manages configuration per environment and enforces existence of configurations
  */
@@ -47,7 +49,7 @@ class Config
     public static function get($key)
     {
         $env = getenv('ENVIRONMENT');
-        $yml = yaml_parse_file(self::getConfigFile());
+        $yml = Yaml::parse(file_get_contents(self::getconfigFile()));
         if (is_array($yml[$key]) && array_key_exists($env, $yml[$key])) {
             return $yml[$key][$env];
         }
