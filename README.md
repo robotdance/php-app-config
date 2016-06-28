@@ -9,9 +9,9 @@ PHP-app-config is a component to store application/package settings, also capabl
 
 ## Setup
 
-PHP-app-config uses [Composer](http://getcomposer.org) as dependency management tool.
+PHP-app-config uses [Composer](http://getcomposer.org) as dependency management tool. Create or ppdate your `composer.json` file and run:
 
-`$ composer install`
+`$ composer install` or `$ composer update`
 
 ## Use
 
