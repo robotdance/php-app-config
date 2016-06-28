@@ -3,6 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/robotdance/php-app-config/badges/gpa.svg)](https://codeclimate.com/github/robotdance/php-app-config)
 [![Test Coverage](https://codeclimate.com/github/robotdance/php-app-config/badges/coverage.svg)](https://codeclimate.com/github/robotdance/php-app-config/coverage)
 [![Issue Count](https://codeclimate.com/github/robotdance/php-app-config/badges/issue_count.svg)](https://codeclimate.com/github/robotdance/php-app-config)
+[![Build Status](https://travis-ci.org/robotdance/php-app-config.svg?branch=master)](https://travis-ci.org/robotdance/php-app-config)
 
 PHP-app-config is a component to store application/package settings, also capable of storing it per environment if necessary.
 
